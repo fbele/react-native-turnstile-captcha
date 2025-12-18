@@ -56,9 +56,7 @@
     "react-native-webview": "^13.16.0",
     "react-test-renderer": "^19.2.3",
     "tsup": "^8.5.1",
+    "turnstile-types": "^1.2.3",
     "typescript": "^5.9.3"
-  },
-  "dependencies": {
-    "turnstile-types": "^1.2.3"
   }
 }
