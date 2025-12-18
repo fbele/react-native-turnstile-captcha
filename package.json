@@ -1,6 +1,6 @@
 {
   "name": "react-native-turnstile-captcha",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A wrapper for CloudFlare Turnstile for use in React Native apps.",
   "repository": {
     "type": "git",

@@ -58,82 +58,84 @@ export type ReactNativeTurnstileCaptchaHandle = {
   sendCommand: (command: "execute" | "remove" | "reset") => void;
 };
 
-const ReactNativeTurnstileCaptcha = forwardRef<ReactNativeTurnstileCaptchaHandle, ReactNativeTurnstileCaptchaProps>(
-  (props, ref) => {
-    const {
-      action = "",
-      appearance = "always",
-      baseUrl = "https://localhost",
-      cData = "",
-      execution = "render",
-      feedbackEnabled = true,
-      language = "auto",
-      onAfterInteractive,
-      onBeforeInteractive,
-      onError,
-      onExpired,
-      onTimeout,
-      onSuccess,
-      refreshExpired = "auto",
-      refreshTimeout = "auto",
-      responseField = true,
-      responseFieldName = "cf-turnstile-response",
-      retry = "auto",
-      retryInterval = 8000,
-      siteKey,
-      size = "normal",
-      style,
-      theme = "auto",
-      webViewStyle,
-    } = props;
+export const ReactNativeTurnstileCaptcha = forwardRef<
+  ReactNativeTurnstileCaptchaHandle,
+  ReactNativeTurnstileCaptchaProps
+>((props, ref) => {
+  const {
+    action = "",
+    appearance = "always",
+    baseUrl = "https://localhost",
+    cData = "",
+    execution = "render",
+    feedbackEnabled = true,
+    language = "auto",
+    onAfterInteractive,
+    onBeforeInteractive,
+    onError,
+    onExpired,
+    onTimeout,
+    onSuccess,
+    refreshExpired = "auto",
+    refreshTimeout = "auto",
+    responseField = true,
+    responseFieldName = "cf-turnstile-response",
+    retry = "auto",
+    retryInterval = 8000,
+    siteKey,
+    size = "normal",
+    style,
+    theme = "auto",
+    webViewStyle,
+  } = props;
 
-    if (!siteKey) {
-      console.warn("Turnstile Site Key not set.");
-      return null;
-    }
+  if (!siteKey) {
+    console.warn("Turnstile Site Key not set.");
+    return null;
+  }
 
-    const [webViewHeight, setWebViewHeight] = useState(65);
-    const webviewRef = useRef<WebView>(null);
+  const [webViewHeight, setWebViewHeight] = useState(65);
+  const webviewRef = useRef<WebView>(null);
 
-    useImperativeHandle(ref, () => ({
-      sendCommand(command) {
-        webviewRef.current?.injectJavaScript(`
+  useImperativeHandle(ref, () => ({
+    sendCommand(command) {
+      webviewRef.current?.injectJavaScript(`
         window.dispatchEvent(new MessageEvent('command', { data: '${command}' }));
         true;   // this is needed to prevent issues on Android
       `);
-      },
-    }));
+    },
+  }));
 
-    const handleMessage = (event: WebViewMessageEvent) => {
-      const data = JSON.parse(event.nativeEvent.data);
-      switch (data.type) {
-        case "height":
-          setWebViewHeight(data.height);
-          break;
-        case "success":
-          onSuccess(data.token);
-          break;
-        case "error":
-          if (onError) onError(data.error);
-          break;
-        case "expired":
-          if (onExpired) onExpired(data.token);
-          break;
-        case "timeout":
-          if (onTimeout) onTimeout();
-          break;
-        case "before-interactive":
-          if (onBeforeInteractive) onBeforeInteractive();
-          break;
-        case "after-interactive":
-          if (onAfterInteractive) onAfterInteractive();
-          break;
-        default:
-          break;
-      }
-    };
+  const handleMessage = (event: WebViewMessageEvent) => {
+    const data = JSON.parse(event.nativeEvent.data);
+    switch (data.type) {
+      case "height":
+        setWebViewHeight(data.height);
+        break;
+      case "success":
+        onSuccess(data.token);
+        break;
+      case "error":
+        if (onError) onError(data.error);
+        break;
+      case "expired":
+        if (onExpired) onExpired(data.token);
+        break;
+      case "timeout":
+        if (onTimeout) onTimeout();
+        break;
+      case "before-interactive":
+        if (onBeforeInteractive) onBeforeInteractive();
+        break;
+      case "after-interactive":
+        if (onAfterInteractive) onAfterInteractive();
+        break;
+      default:
+        break;
+    }
+  };
 
-    const injectedJavascript = `
+  const injectedJavascript = `
     // micro-optimization to guarantee the DOM is ready even on slow Android devices
     setTimeout(() => {
       const container = document.getElementById('turnstileWidget');
@@ -215,22 +217,22 @@ const ReactNativeTurnstileCaptcha = forwardRef<ReactNativeTurnstileCaptchaHandle
     true;   // this is needed to prevent issues on Android
   `;
 
-    return (
-      <View style={[$container, { height: webViewHeight }, style]}>
-        <WebView
-          ref={webviewRef}
-          bounces={false}
-          javaScriptEnabled={true}
-          domStorageEnabled={true}
-          injectedJavaScript={injectedJavascript}
-          onMessage={handleMessage}
-          overScrollMode={"never"}
-          scrollEnabled={false}
-          style={[$webView, webViewStyle]}
-          originWhitelist={[baseUrl, "https://*.cloudflare.com", "about:blank", "about:srcdoc"]}
-          source={{
-            baseUrl: baseUrl,
-            html: `
+  return (
+    <View style={[$container, { height: webViewHeight }, style]}>
+      <WebView
+        ref={webviewRef}
+        bounces={false}
+        javaScriptEnabled={true}
+        domStorageEnabled={true}
+        injectedJavaScript={injectedJavascript}
+        onMessage={handleMessage}
+        overScrollMode={"never"}
+        scrollEnabled={false}
+        style={[$webView, webViewStyle]}
+        originWhitelist={[baseUrl, "https://*.cloudflare.com", "about:blank", "about:srcdoc"]}
+        source={{
+          baseUrl: baseUrl,
+          html: `
             <!DOCTYPE html>
             <html>
               <head>
@@ -252,14 +254,11 @@ const ReactNativeTurnstileCaptcha = forwardRef<ReactNativeTurnstileCaptchaHandle
               </body>
             </html>
           `,
-          }}
-        />
-      </View>
-    );
-  }
-);
-
-export default ReactNativeTurnstileCaptcha;
+        }}
+      />
+    </View>
+  );
+});
 
 const $container: ViewStyle = {
   width: "100%",
