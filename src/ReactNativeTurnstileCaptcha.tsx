@@ -100,7 +100,7 @@ export const ReactNativeTurnstileCaptcha = forwardRef<
   useImperativeHandle(ref, () => ({
     sendCommand(command) {
       webviewRef.current?.injectJavaScript(`
-        window.dispatchEvent(new MessageEvent('command', { data: '${command}' }));
+        window.dispatchEvent(new MessageEvent('command', { data: ${JSON.stringify(command)} }));
         true;   // this is needed to prevent issues on Android
       `);
     },
@@ -173,21 +173,21 @@ export const ReactNativeTurnstileCaptcha = forwardRef<
       const onTurnstileLoad = () => {
         // Render Turnstile widget
         turnstile.render(container, {
-          'sitekey': '${siteKey}',
-          'action': '${action}',
-          'appearance': '${appearance}',
-          'cData': '${cData}',
-          'execution': '${execution}',
+          'sitekey': ${JSON.stringify(siteKey)},
+          'action': ${JSON.stringify(action)},
+          'appearance': ${JSON.stringify(appearance)},
+          'cData': ${JSON.stringify(cData)},
+          'execution': ${JSON.stringify(execution)},
           'feedback-enabled': ${feedbackEnabled},
-          'language': '${language}',
-          'refresh-expired': '${refreshExpired}',
-          'refresh-timeout': '${refreshTimeout}',
+          'language': ${JSON.stringify(language)},
+          'refresh-expired': ${JSON.stringify(refreshExpired)},
+          'refresh-timeout': ${JSON.stringify(refreshTimeout)},
           'response-field': ${responseField},
-					'response-field-name': ${responseFieldName},
-          'retry': '${retry}',
+          'response-field-name': ${JSON.stringify(responseFieldName)},
+          'retry': ${JSON.stringify(retry)},
           'retry-interval': ${retryInterval},
-          'size': '${size}',
-          'theme': '${theme}',
+          'size': ${JSON.stringify(size)},
+          'theme': ${JSON.stringify(theme)},
           'callback': (token) => postMessage({ type: 'success', token }),
           'error-callback': ${onError ? "(error) => postMessage({ type: 'error', error })" : undefined},
           'expired-callback': ${onExpired ? "(token) => postMessage({ type: 'expired', token })" : undefined},
