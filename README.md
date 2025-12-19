@@ -26,7 +26,7 @@ npm i react-native-turnstile-captcha
 
 ```jsx
 import { useRef } from "react";
-import ReactNativeTurnstile, { ReactNativeTurnstileCaptchaHandle } from "react-native-turnstile-captcha";
+import { ReactNativeTurnstile, ReactNativeTurnstileCaptchaHandle } from "react-native-turnstile-captcha";
 
 // ...
 
@@ -59,37 +59,37 @@ Turnstile tokens expire after 5 minutes and the refresh is handled automatically
 
 Here is the full set of arguments that  `ReactNativeTurnstileCaptcha` takes:
 
-| name               | type                   | description                                                                 |
-| ------------------ | ---------------------- | --------------------------------------------------------------------------- |
-| sitekey            | `string`               | Your Turnstile sitekey (REQUIRED)                                           |
-| action?            | `string`               | -                                                                           |
-| appearance?        | `string`               | defaults to "always"                                                        |
-| baseUrl?           | `string`               | Base URL (defaults to "<http://localhost>")                                 |
-| cData?             | `string`               | -                                                                           |
-| execution?         | `string`               | defaults to "render"                                                        |
-| feedbackEnabled?   | `boolean`              | defaults to `true`                                                          |
-| language?          | `string`               | defaults to "auto"                                                          |
-| refreshExpired?    | `string`               | defaults to "auto"                                                          |
-| refreshTimeout?    | `string`               | defaults to "auto"                                                          |
-| responseField?     | `boolean`              | controls generation of `<input />` element (default `true`)                 |
-| responseFieldName? | `string`               | set the name of `<input />` element (default "cf-turnstile-response")       |
-| ref?               | `ReactNativeTurnstileCaptchaHandle`    | ref to send imperative commands to Turnstile widget         |
-| retry?             | `string`               | one of "auto", "never" (default "auto")                                     |
-| retryInterval?     | `number`               | interval of retries in ms (default 8000)                                    |
-| size?              | `string`               | one of "compact", "normal" (default "normal")                               |
-| style?             | `StyleProp<ViewStyle>` | style for Turnstile wrapper container.                                      |
-| theme?             | `string`               | one of "light", "dark", "auto" (default "auto")                             |
-| webViewStyle?      | `StyleProp<ViewStyle>` | style for Turnstile wrapper (Webview).                                      |
+| name               | type                                   | description                                                                 |
+| ------------------ | -------------------------------------- | --------------------------------------------------------------------------- |
+| sitekey            | `string`                               | Your Turnstile sitekey (REQUIRED)                                           |
+| action?            | `string`                               | -                                                                           |
+| appearance?        | `string`                               | defaults to "always"                                                        |
+| baseUrl?           | `string`                               | Base URL (defaults to "<http://localhost>")                                 |
+| cData?             | `string`                               | -                                                                           |
+| execution?         | `string`                               | defaults to "render"                                                        |
+| feedbackEnabled?   | `boolean`                              | defaults to `true`                                                          |
+| language?          | `string`                               | defaults to "auto"                                                          |
+| refreshExpired?    | `string`                               | defaults to "auto"                                                          |
+| refreshTimeout?    | `string`                               | defaults to "auto"                                                          |
+| responseField?     | `boolean`                              | controls generation of `<input />` element (default `true`)                 |
+| responseFieldName? | `string`                               | set the name of `<input />` element (default "cf-turnstile-response")       |
+| ref?               | `ReactNativeTurnstileCaptchaHandle`    | ref to send imperative commands to Turnstile widget                         |
+| retry?             | `string`                               | one of "auto", "never" (default "auto")                                     |
+| retryInterval?     | `number`                               | interval of retries in ms (default 8000)                                    |
+| size?              | `string`                               | one of "compact", "normal" (default "normal")                               |
+| style?             | `StyleProp<ViewStyle>`                 | style for Turnstile wrapper container.                                      |
+| theme?             | `string`                               | one of "light", "dark", "auto" (default "auto")                             |
+| webViewStyle?      | `StyleProp<ViewStyle>`                 | style for Turnstile wrapper (Webview).                                      |
 
 And the following callbacks:
 
-| name                 | arguments | description                                                                |
-| -------------------- | --------- | -------------------------------------------------------------------------- |
-| onSuccess            | token     | invoked upon success of the challenge (REQUIRED)                           |
-| onAfterInteractive?  | -         | invoked when challenge has left interactive mode                           |
-| onBeforeInteractive? | -         | invoked before the challenge enters interactive mode                       |
-| onError?             | error     | invoked when there is an error, refer to [Client-side errors](https://developers.cloudflare.com/turnstile/troubleshooting/client-side-errors/)                                                                  |
-| onExpired?           | token     | invoked when the token expires and does not reset the widget               |
-| onTimeout?           | -         | invoked when the challenge presents but was not solved within a given time |
+| name                 | arguments | description                                                                                                                                     |
+| -------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| onSuccess            | token     | invoked upon success of the challenge (REQUIRED)                                                                                                |
+| onAfterInteractive?  | -         | invoked when challenge has left interactive mode                                                                                                |
+| onBeforeInteractive? | -         | invoked before the challenge enters interactive mode                                                                                            |
+| onError?             | error     | invoked when there is an error, refer to [Client-side errors](https://developers.cloudflare.com/turnstile/troubleshooting/client-side-errors/)  |
+| onExpired?           | token     | invoked when the token expires and does not reset the widget                                                                                    |
+| onTimeout?           | -         | invoked when the challenge presents but was not solved within a given time                                                                      |
 
 For more details on what each argument does, see the [Cloudflare Documentation](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/#configurations).
