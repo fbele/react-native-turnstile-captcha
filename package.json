@@ -1,6 +1,6 @@
 {
   "name": "react-native-turnstile-captcha",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A wrapper for CloudFlare Turnstile for use in React Native apps.",
   "repository": {
     "type": "git",
@@ -20,7 +20,7 @@
     "dist/**/*.d*"
   ],
   "keywords": [
-    "cloudFfare",
+    "cloudflare",
     "turnstile",
     "react",
     "native",
@@ -38,23 +38,23 @@
     "react-native-webview": ">=13.8.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
-    "@babel/runtime": "^7.28.4",
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.0",
+    "@babel/runtime": "^7.28.6",
     "@react-native-community/eslint-config": "^3.2.0",
     "@react-native/babel-preset": "^0.83.1",
-    "@tsconfig/react-native": "^3.0.8",
+    "@tsconfig/react-native": "^3.0.9",
     "@types/jest": "^30.0.0",
-    "@types/react": "^19.2.7",
+    "@types/react": "^19.2.13",
     "@types/react-test-renderer": "^19.1.0",
     "babel-jest": "^30.2.0",
     "eslint": "^9.39.2",
     "jest": "^30.2.0",
-    "prettier": "^3.7.4",
-    "react": "^19.2.3",
+    "prettier": "^3.8.1",
+    "react": "^19.2.4",
     "react-native": "^0.83.1",
     "react-native-webview": "^13.16.0",
-    "react-test-renderer": "^19.2.3",
+    "react-test-renderer": "^19.2.4",
     "tsup": "^8.5.1",
     "turnstile-types": "^1.2.3",
     "typescript": "^5.9.3"

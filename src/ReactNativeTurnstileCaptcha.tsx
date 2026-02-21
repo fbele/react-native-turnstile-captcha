@@ -89,11 +89,6 @@ export const ReactNativeTurnstileCaptcha = forwardRef<
     webViewStyle,
   } = props;
 
-  if (!siteKey) {
-    console.warn("Turnstile Site Key not set.");
-    return null;
-  }
-
   const [webViewHeight, setWebViewHeight] = useState(65);
   const webviewRef = useRef<WebView>(null);
 
@@ -105,6 +100,11 @@ export const ReactNativeTurnstileCaptcha = forwardRef<
       `);
     },
   }));
+
+  if (!siteKey) {
+    console.warn("Turnstile Site Key not set.");
+    return null;
+  }
 
   const handleMessage = (event: WebViewMessageEvent) => {
     const data = JSON.parse(event.nativeEvent.data);
